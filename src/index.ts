@@ -46,7 +46,7 @@ export default class MongoESIndexer {
             this.defaultConfig = JSON.parse(await fs.readFile(this.defaultConfigPath,{encoding:'utf-8'}));
         }
         for (let configFilePath of configFilePaths) {
-            let config: IConfig = JSON.parse(await fs.readFile(path.join(this.configDir, configFilePath)));
+            let config: IConfig = JSON.parse(await fs.readFile(path.join(this.configDir, configFilePath),{encoding:'utf-8'}));
             config = merge(this.defaultConfig, config);
             config.indexName = config.indexName || (this.indexPrefix + config.model).toLowerCase();
             config.batchSize = Math.min(config.batchSize || DEFAULT_BATCH_SIZE, 1000);
