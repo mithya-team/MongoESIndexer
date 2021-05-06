@@ -43,10 +43,10 @@ export default class MongoESIndexer {
         this.db = await MongoQueryResolver.init(this.mongoUri);
         const configFilePaths = await fs.readdir(this.configDir);
         if (this.defaultConfigPath) {
-            this.defaultConfig = require(this.defaultConfigPath);
+            this.defaultConfig = JSON.parse(await fs.readFile(this.defaultConfigPath,{encoding:'utf-8'}));
         }
         for (let configFilePath of configFilePaths) {
-            let config: IConfig = require(path.join(this.configDir, configFilePath));
+            let config: IConfig = JSON.parse(await fs.readFile(path.join(this.configDir, configFilePath)));
             config = merge(this.defaultConfig, config);
             config.indexName = config.indexName || (this.indexPrefix + config.model).toLowerCase();
             config.batchSize = Math.min(config.batchSize || DEFAULT_BATCH_SIZE, 1000);
