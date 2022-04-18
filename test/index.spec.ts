@@ -62,7 +62,7 @@ describe('setup', function () {
 });
 
 
-describe.skip('indexOne', () => {
+describe('indexOne', () => {
     it('should index single instance', async function () {
         await mongoESIndexer.indexOne('testdbuser', users[0]._id).should.be.fulfilled;
     });
@@ -74,7 +74,7 @@ describe('updateOne', () => {
     });
 });
 
-describe.skip('deleteOne', () => {
+describe('deleteOne', () => {
     it('should delete single instance', async function () {
         await mongoESIndexer.deleteOne('testdbuser', users[0]._id).should.be.fulfilled;
     });
@@ -83,13 +83,13 @@ describe.skip('deleteOne', () => {
     });
 });
 
-describe.skip('bulkIndex', () => {
+describe('bulkIndex', () => {
     it('should index 300 users', async function () {
         await mongoESIndexer.bulkIndex('testdbuser', { limit: 300 }).should.be.fulfilled;
     });
 });
 
-describe.skip('bulkUpdate', () => {
+describe('bulkUpdate', () => {
     it('should update age to 20 of all users', async function () {
         await mongoESIndexer.bulkUpdate('testdbuser', {}, { Age: 20 }).should.be.fulfilled;
     });
