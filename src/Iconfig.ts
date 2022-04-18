@@ -4,7 +4,7 @@ export interface IIndexSettings {
     settings: Object,
     mappings: {
         doc: {
-            properties: Object
+            properties: any
         }
     }
 }

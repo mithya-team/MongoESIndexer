@@ -52,11 +52,11 @@ after(async () => {
 
 describe('setup', function () {
     it('should fail with invalid configDir', async function () {
-        mongoESIndexer = new MongoESIndexer("./invalidpath", "http://localhost:9200/", "mongodb://localhost:27017/testdb", "testdb");
+        mongoESIndexer = new MongoESIndexer("./invalidpath", `http://elastic:${process.env.ES_PASS}@localhost:9200/`, "mongodb://localhost:27017/testdb", "testdb");
         await mongoESIndexer.setup().should.be.rejected;
     });
     it('should pass with correct configDir', async function () {
-        mongoESIndexer = new MongoESIndexer("./test/testconfigs", "http://localhost:9200/", "mongodb://localhost:27017/testdb", "testdb");
+        mongoESIndexer = new MongoESIndexer("./test/testconfigs", `http://elastic:${process.env.ES_PASS}@localhost:9200/`, "mongodb://localhost:27017/testdb", "testdb");
         await mongoESIndexer.setup().should.be.fulfilled;
     });
 });

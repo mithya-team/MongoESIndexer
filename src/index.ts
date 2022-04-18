@@ -6,6 +6,7 @@ import { Client } from '@elastic/elasticsearch';
 import IConfig from './Iconfig';
 import { promisify } from 'util';
 import * as merge from 'deepmerge';
+import { BulkOperationType, BulkResponse } from '@elastic/elasticsearch/lib/api/types';
 const DEFAULT_BATCH_SIZE = 100;
 const DEFAULT_BATCH_INTERVAL = 0;
 const delay = promisify(setTimeout);
@@ -82,7 +83,6 @@ export default class MongoESIndexer {
             await this.client.delete({
                 index: indexName,
                 id: _id.toString(),
-                type: 'doc'
             });
         } catch (error) {
             return error;
@@ -106,7 +106,6 @@ export default class MongoESIndexer {
         try {
             await this.client.deleteByQuery({
                 index: indexName,
-                type: 'doc',
                 body: query
             });
         } catch (error) {
@@ -134,7 +133,6 @@ export default class MongoESIndexer {
         try {
             await this.client.index({
                 index: indexName,
-                type: 'doc',
                 body: {
                     ...doc,
                     _id: undefined,
@@ -192,7 +190,6 @@ export default class MongoESIndexer {
             await this.client.update({
                 id: _id.toString(),
                 index: indexName,
-                type: 'doc',
                 body: {
                     doc: {
                         ...doc,
@@ -222,7 +219,7 @@ export default class MongoESIndexer {
 
     async doesIndexExists(indexName: string): Promise<boolean> {
         let existsResp = await this.client.indices.exists({ index: indexName });
-        return existsResp && (existsResp.statusCode === 200 || existsResp.statusCode === 202);
+        return existsResp;
     }
 
     async deleteIndex(indexName: string) {
@@ -263,7 +260,11 @@ export default class MongoESIndexer {
         }
         else{
             console.info("Creating index:", indexName);
-            await this.client.indices.create({ index: indexName, body: config.indexSettings });
+            await this.client.indices.create({ index: indexName, mappings: {
+                    properties:config.indexSettings?.mappings?.doc?.properties
+                },
+                settings: config.indexSettings.settings 
+            });
         }
     }
 
@@ -272,7 +273,6 @@ export default class MongoESIndexer {
         return this.client.indices.putMapping({
             index: indexName,
             body: mappings,
-            type: "doc"
         });
     }
 
@@ -280,14 +280,14 @@ export default class MongoESIndexer {
         const config = this.getConfigByIndexName(indexName);
         const dbQuery = { ...config.dbQuery, ...filter };
         const docs = await MongoQueryResolver.filter(dbQuery);
-        const bulkOperations: any[] = [];
+        const bulkOperations: BulkOperationType[] = [];
 
         docs.forEach(doc => {
             bulkOperations.push(...[
                 {
                     index: {
                         _index: indexName,
-                        _type: "doc",
+                        _type: "_doc",
                         _id: doc._id
                     }
                 },
@@ -299,11 +299,10 @@ export default class MongoESIndexer {
             ]);
         });
 
-        let bulkResp;
+        let bulkResp: BulkResponse;
         try {
             bulkResp = await this.client.bulk({
                 index: indexName,
-                type: "_doc",
                 body: bulkOperations
             });
 
@@ -343,7 +342,7 @@ export default class MongoESIndexer {
                 {
                     update: {
                         _index: indexName,
-                        _type: "doc",
+                        _type: "_doc",
                         _id: doc._id,
                         retry_on_conflict: 3
                     }
@@ -359,11 +358,10 @@ export default class MongoESIndexer {
             ]);
         });
 
-        let bulkResp;
+        let bulkResp: BulkResponse;
         try {
             bulkResp = await this.client.bulk({
                 index: indexName,
-                type: "_doc",
                 body: bulkOperations
             });
 
@@ -385,17 +383,18 @@ export default class MongoESIndexer {
         }
     }
 
-    private async saveBulkResp(bulkResp: { body: { items: any[]; }; }, config: IConfig) {
-        const successItemsIds = bulkResp.body.items
-            .filter((item: any) => item && item.index && item.index.status >= 200 && item.index.status < 300)
-            .map((item: any) => item.index && item.index._id)
-            .filter((_id: any) => _id);
+    private async saveBulkResp(bulkResp: BulkResponse, config: IConfig) {
+        const successItemsIds = bulkResp.items
+            .filter((item) => item && item.index && item.index.status >= 200 && item.index.status < 300)
+            .map((item) => item.index && item.index._id)
+            .filter((_id) => _id);
 
-        const indexErrors = bulkResp.body.items
-            .filter((item: any) => item && item.index && (item.index.status < 200 || item.index.status >= 300))
-            .map((item: any) => item.index)
-            .filter((indexError: any) => indexError);
-        console.log("indexErrors", indexErrors)
+        const indexErrors = bulkResp.items
+            .filter((item) => item && item.index && (item.index.status < 200 || item.index.status >= 300))
+            .map((item) => item.index)
+            .filter((indexError) => indexError);
+
+        console.log('IndexErrors', indexErrors);
 
         await this.db.collection(config.model).updateMany({
             _id: {
