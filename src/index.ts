@@ -1,4 +1,4 @@
-import * as MongoQueryResolver from 'mongoqueryresolver';
+import * as MongoQueryResolver from '@mithyateam/mongoqueryresolver';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { Db, ObjectId } from 'mongodb';
