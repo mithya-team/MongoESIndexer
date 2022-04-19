@@ -287,7 +287,7 @@ export default class MongoESIndexer {
                 {
                     index: {
                         _index: indexName,
-                        _type: "_doc",
+                        // type: "_doc",
                         _id: doc._id
                     }
                 },
@@ -342,7 +342,7 @@ export default class MongoESIndexer {
                 {
                     update: {
                         _index: indexName,
-                        _type: "_doc",
+                        // _type: "_doc",
                         _id: doc._id,
                         retry_on_conflict: 3
                     }
