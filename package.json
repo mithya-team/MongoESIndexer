@@ -14,7 +14,7 @@
     "@elastic/elasticsearch": "^8.1.0",
     "deepmerge": "^4.2.2",
     "mongodb": "^3.4.1",
-    "mongoqueryresolver": "git@github.com:jagzmz/mongoqueryresolver.git"
+    "mongoqueryresolver": "git+ssh://git@github.com/jagzmz/mongoqueryresolver.git"
   },
   "devDependencies": {
     "@types/chai": "^4.2.0",
