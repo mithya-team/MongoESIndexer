@@ -1,4 +1,4 @@
-import { Filter } from 'mongoqueryresolver'
+import { Filter } from '@mithyateam/mongoqueryresolver'
 
 export interface IIndexSettings {
     settings: Object,

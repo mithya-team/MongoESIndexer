@@ -1,5 +1,5 @@
 import MongoESIndexer from '../src/index';
-import * as MongoQueryResolver from 'mongoqueryresolver';
+import * as MongoQueryResolver from '@mithyateam/mongoqueryresolver';
 import * as chai from 'chai';
 import * as faker from 'faker';
 import { Db, ObjectID } from 'mongodb';
