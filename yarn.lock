@@ -404,6 +404,14 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@mithyateam/mongoqueryresolver@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@mithyateam/mongoqueryresolver/-/mongoqueryresolver-1.2.1.tgz#08571bd5debe518d00a0ceb20ea96058de4a711f"
+  integrity sha512-LVZdVTio5rxJPcYMt3MHdWbqIpDDl3lZ3X/bslGr8AaiWFf37aftL88Q3TQP4/v7698oZ+4FSHXGOA73NS/ujA==
+  dependencies:
+    lodash "^4.17.15"
+    mongodb "^3.3.0"
+
 "@types/babel__core@^7.1.0":
   version "7.1.19"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.19.tgz#7b497495b7d1b4812bdb9d02804d0576f43ee460"

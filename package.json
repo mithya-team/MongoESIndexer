@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@elastic/elasticsearch": "npm:@elastic/elasticsearch@^6.8.3",
+    "@mithyateam/mongoqueryresolver": "^1.2.1",
     "deepmerge": "^4.2.2",
-    "mongodb": "^3.4.1",
-    "mongoqueryresolver": "git+ssh://github.com/mithya-team/mongoqueryresolver"
+    "mongodb": "^3.4.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.0",
