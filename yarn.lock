@@ -404,10 +404,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mithyateam/mongoqueryresolver@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@mithyateam/mongoqueryresolver/-/mongoqueryresolver-1.2.1.tgz#08571bd5debe518d00a0ceb20ea96058de4a711f"
-  integrity sha512-LVZdVTio5rxJPcYMt3MHdWbqIpDDl3lZ3X/bslGr8AaiWFf37aftL88Q3TQP4/v7698oZ+4FSHXGOA73NS/ujA==
+"@mithyateam/mongoqueryresolver@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@mithyateam/mongoqueryresolver/-/mongoqueryresolver-1.3.0.tgz#fbc8d87bbe54578b9fda3406a4f46e72c9b41e6b"
+  integrity sha512-2209ATxTzTjXrLzeVEM6HJAj1AyKkCWhMDIc+XQudKbZR3fOmMT4YbOyHc8ur9x0VGZ1q1BB7BiXxiobwH8MMg==
   dependencies:
     lodash "^4.17.15"
     mongodb "^3.3.0"
@@ -519,10 +519,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.3.tgz#463fc47f13ec0688a33aec75d078a0541a447199"
   integrity sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==
 
-"@types/node@^12.12.24":
-  version "12.20.55"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.55.tgz#c329cbd434c42164f846b909bd6f85b5537f6240"
-  integrity sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==
+"@types/node@^18.6.3":
+  version "18.6.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.3.tgz#4e4a95b6fe44014563ceb514b2598b3e623d1c98"
+  integrity sha512-6qKpDtoaYLM+5+AFChLhHermMQxc3TOEFIDzrZLPRGHPrLEwqFkkT5Kx3ju05g6X7uDPazz3jHbKPX0KzCjntg==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -538,6 +538,11 @@
   version "13.0.12"
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-13.0.12.tgz#d895a88c703b78af0465a9de88aa92c61430b092"
   integrity sha512-qCxJE1qgz2y0hA4pIxjBR+PelCH0U5CK1XJXFwCNqfmliatKp47UCXXE9Dyk1OXBDLvsCF57TqQEJaeLfDYEOQ==
+
+"@types/yargs@^17.0.10":
+  version "17.0.10"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-17.0.10.tgz#591522fce85d8739bca7b8bb90d048e4478d186a"
+  integrity sha512-gmEaFwpj/7f/ROdtIlci1R1VYU1J4j95m8T+Tj3iBgiBFKg1foE/PSl93bBd5T9LDXNPo8UlNN6W0qwD8O5OaA==
   dependencies:
     "@types/yargs-parser" "*"
 
@@ -1316,11 +1321,6 @@ detect-newline@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
   integrity sha512-CwffZFvlJffUg9zZA0uqrjQayUTC8ob94pnr5sFwaVv3IOmkfUHcWH+jXaQK3askE51Cqe8/9Ql/0uXNwqZ8Zg==
-
-diff-sequences@^24.9.0:
-  version "24.9.0"
-  resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-24.9.0.tgz#5715d6244e2aa65f48bba0bc972db0b0b11e95b5"
-  integrity sha512-Dj6Wk3tWyTE+Fo1rW8v0Xhwk80um6yFYKbuAxc9c3EZxIHFDYwbi34Uk42u1CdnIiVorvt4RmlSDjIPyzGC2ew==
 
 diff@3.5.0:
   version "3.5.0"
@@ -2424,11 +2424,6 @@ jest-diff@^24.3.0, jest-diff@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.9.0.tgz#931b7d0d5778a1baf7452cb816e325e3724055da"
   integrity sha512-qMfrTs8AdJE2iqrTp0hzh7kTd2PQWrsFyj9tORoKmu32xjPjeE4NyjVRDz8ybYwqS2ik8N4hsIpiVTyFeo2lBQ==
-  dependencies:
-    chalk "^2.0.1"
-    diff-sequences "^24.9.0"
-    jest-get-type "^24.9.0"
-    pretty-format "^24.9.0"
 
 jest-docblock@^24.3.0:
   version "24.9.0"
@@ -3101,13 +3096,6 @@ mongodb@^3.3.0, mongodb@^3.4.1:
     safe-buffer "^5.1.2"
   optionalDependencies:
     saslprep "^1.0.0"
-
-"mongoqueryresolver@git+ssh://github.com/mithya-team/mongoqueryresolver":
-  version "1.0.21"
-  resolved "git+ssh://github.com/mithya-team/mongoqueryresolver#e9b08f83d2291e30c3e3638ba14a196161ac60fe"
-  dependencies:
-    lodash "^4.17.15"
-    mongodb "^3.3.0"
 
 ms@2.0.0:
   version "2.0.0"
