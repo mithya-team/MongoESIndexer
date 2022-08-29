@@ -184,7 +184,7 @@ export default class MongoESIndexer {
                     _id
                 }
             });
-            return;
+            return { error: "Document Not Found" };
         }
 
         let success = false;
@@ -208,6 +208,7 @@ export default class MongoESIndexer {
                     _elasticSearchError: error
                 }
             });
+            return { error };
         }
 
         if (success) {
@@ -218,6 +219,7 @@ export default class MongoESIndexer {
                 }
             });
         }
+        return { error: null };
     }
 
     async doesIndexExists(indexName: string): Promise<boolean> {
